@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="0120138a-0561-4dae-87a3-a96e5c093b52" ChangeDateTime="12/22/2020 05:17:55">
+    <Property Name="ElementName" Value="[dbo].[ApplicationUser].[PhoneNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ApplicationUser]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MobileNumber" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a0077e85-ca7a-48c0-b23c-d0f3e524bad2" ChangeDateTime="12/22/2020 05:18:03">
+    <Property Name="ElementName" Value="[dbo].[ApplicationUser].[PhoneNumberConfirmed]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ApplicationUser]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MobileNumberConfirmed" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f8f8bf88-29ef-4e2b-992f-423dd1dca23d" ChangeDateTime="12/28/2020 05:53:25">
+    <Property Name="ElementName" Value="[dbo].[ApplicationUser].[Ststus]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ApplicationUser]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Status" />
+  </Operation>
+</Operations>
