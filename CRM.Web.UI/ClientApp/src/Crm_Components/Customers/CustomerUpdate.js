@@ -97,7 +97,7 @@ const CustomerUpdate = (props) => {
     }
     const CheckLeadType = (e) => {
         console.log(e)
-        if (e.target.value !== 'Reference')
+        if (e.target.value !== '1')
             document.getElementById('refname').style.display = 'none';
         else
             document.getElementById('refname').style.display = 'block';
@@ -142,7 +142,17 @@ const CustomerUpdate = (props) => {
 
             .then(res => res.json())
              .then(
-                (data) => { setUdata(data) },
+                (data) => { setUdata(data) 
+                    document.getElementById("status").value=data.status;
+                    document.getElementById("prointerested").value=data.interestedProduct;
+                    document.getElementById("leadtype").value=data.leadType;
+                    document.getElementById("businesstype").value=data.businessType;
+
+                    if (data.leadtype !== '1')
+                    document.getElementById('refname').style.display = 'none';
+                else
+                    document.getElementById('refname').style.display = 'block';
+                },
                 (error) => {console.log('error', error);}
             );
     }, []) // eslint-disable-line react-hooks/exhaustive-deps

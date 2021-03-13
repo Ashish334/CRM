@@ -84,7 +84,10 @@ const ProductUpdate = (props) => {
 
             .then(res => res.json())
             .then(
-                (data) => { setData(data) },
+                (data) => { setData(data)
+                    document.getElementById("status").value=data.status;
+                    document.getElementById("gst").value=data.gst;
+                },
                 (error) => { console.log('error', error); }
             );
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
@@ -112,7 +115,7 @@ const ProductUpdate = (props) => {
                         </div>
                         <div class="col">
                         <label>Product Status</label>
-                            <select class="form-control"  id="status" value={data?.status} name="status">
+                            <select class="form-control"  id="status"  name="status">
                                 <option>Select...</option>
                                 <option value='0'>Active</option>
                                 <option value='1'>InActive</option>
@@ -129,7 +132,7 @@ const ProductUpdate = (props) => {
                         <div class="col">
                         <label>GST%</label>
                            
-                             <select class="form-control"  value={data?.gst} id="gst" name="gst">
+                             <select class="form-control"   id="gst" name="gst">
                             <option >Please select</option>
                             {Prd_gstper.map(p=><option value={p.id}>{p.name}</option>)}
                             </select>

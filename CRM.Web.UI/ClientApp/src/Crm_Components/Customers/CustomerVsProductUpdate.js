@@ -93,43 +93,65 @@ const CustomerVsProductUpdate = (props) => {
             );
     } // eslint-disable-line react-hooks/exhaustive-deps
 
-    const [qty, setQty] = useState(0);
-    const onchangeQty = (i, e) => {
-        var b = (e.target.value);
-        var qt = b === 0 ? 1 : b === '' ? 1 : b;
-        var pr = inputFields[i].price;
+    function onchangeQty  (i, e) {
+        if (inputFields[i].productName === '') { // check if value is empty
+            var Productid= 'productName'+i;
+            alert('Need to Select Product Name');
+            document.getElementById(Productid).focus(); 
+            inputFields[i].qty='';
+            return 
+        }
+        var qtyValue = (e.target.value);
+        var qtyVal = qtyValue === 0 ? 1 : qtyValue === '' ? 1 : qtyValue;
+        var productprice = inputFields[i].price;
         var gst = inputFields[i].gstPer;
-        var gt = (((pr * 100) / (100 + gst)) / 100) * gst;
-        var dp = inputFields[i].discountPer;
-        var d = dp === 0 ? 0 : dp === '' ? 0 : dp;
-        var t = ((pr * 100) / (100 + gst));
-        var dscamnt = ((d / 100) * t) * qt;
+        var AmountExcludegst = (((productprice * 100) / (100 + gst)) / 100) * gst;
+        var discount = inputFields[i].discountPer;
+        var discountpersent = discount === 0 ? 0 : discount === '' ? 0 : discount;
+        var excludegstAmt = ((productprice * 100) / (100 + gst));
+        var dscamnt = ((discountpersent / 100) * excludegstAmt) * qtyVal;
         inputFields[i].discountAmt = dscamnt;
-        var amountnet = (pr * qt) - dscamnt;
+        var amountnet = (productprice * qtyVal) - dscamnt;
         inputFields[i].netamt = amountnet;
-        var gstamnt = gt * qt;
+        var gstamnt = AmountExcludegst * qtyVal;
         inputFields[i].gstAmt = gstamnt;
-        setInputFields(inputFields);
-        setQty(b);
+        inputFields[i].qty = qtyValue;
+       
     }
 
-    
+   
 
-    const [, setdisc] = useState(0);
-    const onchangedisc = (i, e) => {
-        var a = e.target.value;
-        var d = a === 0 ? 0 : a === '' ? 0 : a;
-        var pr = inputFields[i].price;
+   
+    function onchangedisc  (i, e)  {
+        if (inputFields[i].productName === '') { // check if value is empty
+            var Productid= 'productName'+i;
+            alert('Need to Select Product Name');
+            document.getElementById(Productid).focus(); 
+            inputFields[i].qty='';
+            inputFields[i].discountPer='';
+            return 
+        }
+        if (inputFields[i].qty === '') { // check if value is empty
+            var qtyid= 'qty'+i;
+            alert('Need to Select Quantity');
+            document.getElementById(qtyid).focus(); 
+            inputFields[i].discountPer='';
+            return 
+        }
+        var targetval = e.target.value;
+        var discountval = targetval === 0 ? 0 : targetval === '' ? 0 : targetval;
+        var productprice = inputFields[i].price;
         var gst = inputFields[i].gstPer;
-        var gt = ((pr * 100) / (100 + gst));
-        var qt = qty === 0 ? 1 : qty === '' ? 1 : qty;
-        var dscamnt = ((d / 100) * gt) * qt;
+        var AmountExcludegst = ((productprice * 100) / (100 + gst));
+        var qty=inputFields[i].qty;
+        var qtyVal = qty === 0 ? 1 : qty === '' ? 1 : qty;
+        var dscamnt = ((discountval / 100) * AmountExcludegst) * qtyVal;
         inputFields[i].discountAmt = dscamnt;
-        var amtnet = (pr * qt) - dscamnt;
+        var amtnet = (productprice * qtyVal) - dscamnt;
         inputFields[i].netamt = amtnet;
-        setInputFields(inputFields);
-        setdisc(d);
-
+        inputFields[i].discountPer = targetval;
+       
+      
     }
 
 
@@ -328,7 +350,7 @@ const CustomerVsProductUpdate = (props) => {
                                         <div class="col-3">
 
                                             <select class="form-control"
-                                                id="productName"
+                                                 id={"productName"+index}
                                                 name="productName"
                                                 value={inputField.productName}
                                                 onChange={event => { handleInputChange(index, event); ProductDetails(index, event) }}>
@@ -355,7 +377,7 @@ const CustomerVsProductUpdate = (props) => {
                                                 className="form-control"
                                                 required
                                                 name="qty"
-                                                id="qty"
+                                                id={"qty"+index}
                                                 min="0"
                                                 onKeyDown={blockInvalidChar}
                                                 value={inputField.qty}

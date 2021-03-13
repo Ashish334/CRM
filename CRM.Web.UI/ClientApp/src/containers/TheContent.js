@@ -8,6 +8,7 @@ import { CContainer, CFade } from '@coreui/react'
 
 // routes config
 import routes from '../routes'
+
   
 const loading = (
   <div className="pt-3 text-center">
@@ -17,7 +18,9 @@ const loading = (
 
 const TheContent = () => {
   return (
+    
     <main className="c-main">
+
       <CContainer fluid>
         <Suspense fallback={loading}>
           <Switch>

@@ -57,6 +57,8 @@ const UserUpdate = (props) => {
                         alert("User Updated Successfully")
                         console.log('Success', data);
                         history.push('/userlist')
+
+                       
                     }
                     else {
                         alert("You have wrong entered")
@@ -85,7 +87,10 @@ const UserUpdate = (props) => {
 
             .then(res => res.json())
             .then(
-                (data) => { setData(data) },
+                (data) => { setData(data)
+                    document.getElementById("status").value=data.status;
+                    document.getElementById("Roles").value=data.role;
+                },
                 (error) => { console.log('error', error); }
             );
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
@@ -137,7 +142,7 @@ const UserUpdate = (props) => {
                             <div class="row mt-2">
                                 <div class="col">
                                     <label>Role</label>
-                                    <select class="form-control" id="Roles" name="Roles" value={data?.role}>
+                                    <select class="form-control" id="Roles" name="Roles" >
                                         <option >Please select</option>
                                         {role.map(d => <option >
                                             {d.name}</option>)}
@@ -154,7 +159,7 @@ const UserUpdate = (props) => {
 
                                 <div class="col">
                                     <label>Status</label>
-                                    <select class="form-control" value={data?.status} id="status" name="status">
+                                    <select class="form-control"  id="status" name="status">
                                         <option >Please select</option>
                                         <option value='0' >Active</option>
                                         <option value='1'>InActive</option>
